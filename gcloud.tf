@@ -16,18 +16,11 @@ data "external" "gcloud-billing-budgets-list" {
     "bash",
     "${path.module}/gcloud.sh",
     var.gcloud_command,
-    "--project=${var.billing_project_id}",
     "billing",
     "budgets",
     "list",
     "--billing-account=${local.billing_account_id}",
   ]
-  lifecycle {
-    precondition {
-      condition     = var.billing_project_id != null
-      error_message = "Billing Project ID is required for listing Billing Account Budgets."
-    }
-  }
 }
 
 locals {
@@ -42,18 +35,7 @@ locals {
   gcloud_budget_names = var.gcloud_command == null ? null : [for budget in local.gcloud_budgets : budget.displayName]
 }
 
-# output "budgets" {
-#   description = "List of Billing Account Budgets (list)"
-#   value       = local.gcloud_budgets
-# }
-
 output "budget_names" {
   description = "List of Billing Account Budget Names (list)"
   value       = local.gcloud_budget_names
-}
-
-variable "billing_project_id" {
-  description = "Project ID for the project that will be used to list the Billing Account Budgets with gcloud"
-  type        = string
-  default     = null
 }

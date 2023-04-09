@@ -1,7 +1,7 @@
 module "budget" {
   for_each        = var.budgets
   source          = "terraform-google-modules/project-factory/google//modules/budget"
-  billing_account = var.billing_account_id
+  billing_account = local.billing_account_id
   display_name    = each.key
   amount          = each.value.amount
 
