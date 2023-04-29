@@ -14,7 +14,7 @@ data "external" "gcloud-billing-budgets-list" {
   count = var.gcloud_command == null ? 0 : 1
   program = [
     "bash",
-    "${path.module}/gcloud.sh",
+    "${path.module}/scripts/gcloud.sh",
     var.gcloud_command,
     "--project=${var.billing_project_id}",
     "billing",

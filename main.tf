@@ -16,8 +16,3 @@ provider "google" {
   project               = var.billing_project_id
   user_project_override = true
 }
-
-variable "billing_project_id" {
-  description = "Project ID for the project that will be used to call the Cloud Billing API."
-  type        = string
-}
