@@ -10,7 +10,7 @@ variable "gcloud_command" {
 }
 
 # Retrieve a list of billing account budgets
-data "external" "gcloud-billing-budgets-list" {
+data "external" "gcloud_billing_budgets_list" {
   count = var.gcloud_command == null ? 0 : 1
   program = [
     "bash",
@@ -36,7 +36,7 @@ locals {
   billing_account_id = data.google_billing_account.account.id
 
   # Retrieve the list of Billing Account Budgets from gcloud
-  gcloud_budgets = var.gcloud_command == null ? null : jsondecode(data.external.gcloud-billing-budgets-list[0].result.data)
+  gcloud_budgets = var.gcloud_command == null ? null : jsondecode(data.external.gcloud_billing_budgets_list[0].result.data)
 
   # Generate a list of billing accoun budget names
   gcloud_budget_names = var.gcloud_command == null ? null : [for budget in local.gcloud_budgets : budget.displayName]
