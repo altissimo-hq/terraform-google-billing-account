@@ -12,4 +12,3 @@ output "billing_account_status" {
   description = "Google Billing Account Status (string)"
   value       = data.google_billing_account.account.open == true ? "open" : "closed"
 }
-
